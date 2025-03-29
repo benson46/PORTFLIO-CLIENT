@@ -3,7 +3,7 @@ import { Sidebar } from "../../components/admin/Sidebar"
 import { ProjectCard } from "../../components/admin/ProjectCard"
 import { AddProjectButton } from "../../components/ui/admin/AddProjectButton"
 
-export default function ProjectsEdit() {
+export default function Project() {
   const [projects] = useState([
     {
       id: 1,

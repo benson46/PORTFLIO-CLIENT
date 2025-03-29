@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../../../services/auth";
 import { FormInput } from "../../ui/FromInput";
@@ -10,12 +10,11 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('access_token')) {
-      navigate('/admin/messages');
+    if (localStorage.getItem("access_token")) {
+      navigate("/admin/messages");
     }
   }, [navigate]);
 
-  
   // Validate form fields
   const validateForm = () => {
     let newErrors = {};
@@ -52,16 +51,15 @@ export function LoginForm() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({}); 
+    setErrors({});
 
     if (!validateForm()) return;
     setIsSubmitting(true);
 
     try {
       const loginResponse = await authService.login(formData);
-      console.log(loginResponse.data)
-      if (loginResponse.data.success) {
-        localStorage.setItem("access_token", loginResponse.data.access_token);
+      console.log(loginResponse)
+      if (loginResponse.success) {
         navigate("/admin/messages");
       }
     } catch (error) {
