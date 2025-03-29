@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
-export  function Navbar() {
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const links = ["Home", "Projects", "Skills", "About Me", "Get In Touch"];
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "Projects", path: "/projects" },
+    { name: "About Me", path: "/about" },
+    { name: "Get In Touch", path: "/contact" },
+  ];
+
+  const linkClasses = ({ isActive }) =>
+    isActive
+      ? "text-blue-400 border-b-2 border-blue-400"
+      : "text-gray-300 hover:text-blue-400 transition-colors";
 
   return (
     <nav className="bg-zinc-900 p-4">
@@ -21,17 +32,10 @@ export  function Navbar() {
         {/* Links for larger screens */}
         <ul className="hidden md:flex justify-center space-x-8">
           {links.map((link) => (
-            <li key={link}>
-              <a
-                href={`#${link.toLowerCase().replace(" ", "-")}`}
-                className={`${
-                  link === "Home"
-                    ? "text-blue-400 border-b border-blue-400"
-                    : "text-gray-300 hover:text-blue-400 transition-colors"
-                }`}
-              >
-                {link}
-              </a>
+            <li key={link.name}>
+              <NavLink to={link.path} className={linkClasses}>
+                {link.name}
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -41,14 +45,14 @@ export  function Navbar() {
       {isOpen && (
         <div className="mt-4 flex flex-col gap-4 md:hidden">
           {links.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase().replace(" ", "-")}`}
-              className="text-gray-300 hover:text-blue-400 transition-colors"
-              onClick={() => setIsOpen(false)}
+            <NavLink
+              key={link.name}
+              to={link.path}
+              className={linkClasses}
+              onClick={() => setIsOpen(false)} // Close the menu after clicking
             >
-              {link}
-            </a>
+              {link.name}
+            </NavLink>
           ))}
         </div>
       )}

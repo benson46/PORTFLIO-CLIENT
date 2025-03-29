@@ -1,4 +1,4 @@
-import React from "react"
+"use client"
 import { Trash2 } from "lucide-react"
 
 export function ToggleButton({ isActive, onToggle }) {
@@ -27,3 +27,4 @@ export function DeleteButton({ onClick }) {
     </button>
   )
 }
+

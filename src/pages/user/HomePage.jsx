@@ -1,3 +1,4 @@
+import { Github, Linkedin } from "lucide-react";
 
 export function Homepage() {
   return (

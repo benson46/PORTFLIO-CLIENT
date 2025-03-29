@@ -1,5 +1,7 @@
-import React, { useState } from "react"
-import { ToggleButton, DeleteButton } from "../ui/ActionButton"
+"use client"
+
+import { useState } from "react"
+import { ToggleButton, DeleteButton } from "../ui/admin/ActionButton"
 
 export function MessagesTable() {
   const [messages, setMessages] = useState([
@@ -53,25 +55,42 @@ export function MessagesTable() {
     setMessages(messages.filter((msg) => msg.id !== id))
   }
 
+  // Sort messages to move active ones to the bottom
+  const sortedMessages = [...messages].sort((a, b) => {
+    if (a.isActive && !b.isActive) return 1
+    if (!a.isActive && b.isActive) return -1
+    return 0
+  })
+
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-auto bg-[#222222] rounded-lg shadow-lg">
       <table className="w-full min-w-[800px] text-left">
         <thead>
           <tr className="border-b border-gray-700">
-            <th className="p-4 text-gray-300">Name</th>
-            <th className="p-4 text-gray-300">Message</th>
-            <th className="p-4 text-gray-300">Email</th>
-            <th className="p-4 text-gray-300">Action</th>
+            <th className="p-3 sm:p-4 text-gray-300 font-medium">Name</th>
+            <th className="p-3 sm:p-4 text-gray-300 font-medium">Message</th>
+            <th className="p-3 sm:p-4 text-gray-300 font-medium">Email</th>
+            <th className="p-3 sm:p-4 text-gray-300 font-medium">Action</th>
           </tr>
         </thead>
         <tbody>
-          {messages.map((msg) => (
-            <tr key={msg.id} className="border-b border-gray-700">
-              <td className="p-4 text-white">{msg.name}</td>
-              <td className="p-4 text-gray-400 max-w-xl">{msg.message}</td>
-              <td className="p-4 text-gray-400">{msg.email}</td>
-              <td className="p-4">
-                <div className="flex items-center gap-4">
+          {sortedMessages.map((msg) => (
+            <tr
+              key={msg.id}
+              className={`
+                border-b border-gray-700 hover:bg-[#2A2A2A] transition-colors
+                ${msg.isActive ? "bg-[#1E2E29]" : ""}
+              `}
+            >
+              <td className="p-3 sm:p-4 text-white">{msg.name}</td>
+              <td className="p-3 sm:p-4 text-gray-400">
+                <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg truncate" title={msg.message}>
+                  {msg.message}
+                </div>
+              </td>
+              <td className="p-3 sm:p-4 text-gray-400">{msg.email}</td>
+              <td className="p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                   <ToggleButton isActive={msg.isActive} onToggle={() => toggleMessage(msg.id)} />
                   <DeleteButton onClick={() => deleteMessage(msg.id)} />
                 </div>
@@ -83,3 +102,4 @@ export function MessagesTable() {
     </div>
   )
 }
+

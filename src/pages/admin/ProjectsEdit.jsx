@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Sidebar } from "../../components/admin/Sidebar"
 import { ProjectCard } from "../../components/admin/ProjectCard"
-import { AddProjectButton } from "../../components/admin/AddProjectButton"
+import { AddProjectButton } from "../../components/ui/admin/AddProjectButton"
 
 export default function ProjectsEdit() {
   const [projects] = useState([
