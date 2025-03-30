@@ -1,6 +1,43 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
+import { skillsService } from "../../services/skill";
 
-export function AboutMe  () {
+export function AboutMe() {
+  const [skills, setSkills] = useState({
+    "Language & Frameworks": [],
+    "Database & Cloud": [],
+    "Tools & Platforms": [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await skillsService.getSkills();
+        if (response.success) {
+          setSkills(groupSkillsByCategory(response.skills));
+        }
+      } catch (err) {
+        setError("Failed to load skills");
+        console.error("Error fetching skills:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
+  const groupSkillsByCategory = (skills) => {
+    const categories = {
+      "Language & Frameworks": [],
+      "Database & Cloud": [],
+      "Tools & Platforms": [],
+    };
+    skills.forEach((skill) => categories[skill.category]?.push(skill));
+    return categories;
+  };
+
   return (
     <div className="min-h-screen bg-black text-white p-6 md:p-12">
       <div className="max-w-6xl mx-auto">
@@ -56,9 +93,32 @@ export function AboutMe  () {
             </p>
           </div>
         </div>
+
+        {/* Skills Section */}
+        <div className="mt-12 space-y-12">
+          {loading ? (
+            <p className="text-gray-400 text-center">Loading skills...</p>
+          ) : error ? (
+            <p className="text-red-400 text-center">{error}</p>
+          ) : (
+            Object.entries(skills).map(([category, items]) => (
+              <div key={category} className="space-y-6">
+                <h3 className="text-2xl font-bold text-gray-100">{category}</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {items.map((skill) => (
+                    <div
+                      key={skill._id}
+                      className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
+                    >
+                      <span className="text-gray-300">{skill.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
-  )
+  );
 }
-
-
