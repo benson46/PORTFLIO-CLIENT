@@ -16,9 +16,9 @@ const projects = [
 
 export default function Projects() {
   return (
-    <div className="min-h-screen bg-[#1a1a1a] text-white p-8">
-      <h1 className="text-2xl font-bold mb-8">PROJECTS</h1>
-      <div className="space-y-6">
+    <div className="min-h-screen bg-[#1a1a1a] text-white p-4 sm:p-8">
+      <h1 className="text-2xl font-bold mb-6 sm:mb-8">PROJECTS</h1>
+      <div className="space-y-4 sm:space-y-6">
         {projects.map((project, index) => (
           <ProjectCard key={index} project={project} />
         ))}
