@@ -1,38 +1,42 @@
 export function ProjectCard({ project }) {
   return (
-    <div className="bg-[#242424] rounded-lg">
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 sm:p-6">
-        {/* Logo Section */}
-        <div className="sm:w-32 sm:h-32 w-full flex-shrink-0 bg-[#1a1a1a] rounded-lg flex items-center justify-center p-2">
-          <div className="w-20 h-20 sm:w-24 sm:h-24">
-            <img 
-              src={project.logo || "/placeholder.svg"} 
-              alt="Project logo" 
-              className="w-full h-full object-contain" 
-            />
-          </div>
+    <div className="bg-[#242424] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+      <div className="flex flex-col md:flex-row">
+        {/* Image Section */}
+        <div className="md:w-1/4 relative">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-48 object-cover md:h-56"
+          />
         </div>
 
-        {/* Content Section with Responsive Blue Accent */}
-        <div className="flex-1 relative sm:pl-6 sm:border-l-2 border-blue-500 pt-2 sm:pt-0">
-          <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
-            <h2 className="text-lg sm:text-xl font-semibold">{project.title}</h2>
-            <div className="flex sm:flex-col gap-2 sm:gap-1 text-sm">
-              <a href={project.liveLink} className="text-blue-400 hover:text-blue-300 whitespace-nowrap">
-                Live Demo →
-              </a>
-              <a href={project.sourceCode} className="text-blue-400 hover:text-blue-300 whitespace-nowrap">
-                Source Code →
-              </a>
-            </div>
-          </div>
-          <ul className="space-y-2">
+        {/* Content Section */}
+        <div className="md:w-3/4 p-6">
+          <h2 className="text-2xl font-bold mb-4 text-blue-400">{project.title}</h2>
+          
+          <ul className="space-y-3 mb-6">
             {project.description.map((detail, idx) => (
-              <li key={idx} className="text-gray-300 text-sm sm:text-base">
+              <li key={idx} className="text-gray-300 text-lg">
                 • {detail}
               </li>
             ))}
           </ul>
+
+          <div className="flex gap-4 mt-6">
+            <a 
+              href={project.liveLink}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors"
+            >
+              Live Demo
+            </a>
+            <a 
+              href={project.sourceCode}
+              className="border border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-2 rounded-md transition-colors"
+            >
+              Source Code
+            </a>
+          </div>
         </div>
       </div>
     </div>
