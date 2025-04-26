@@ -1,16 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminRoutes from "./routes/AdminRoutes";
-import { UserPage } from "./pages/UserPage";
+import { Routes, Route } from 'react-router-dom'
+import { HomePage } from './user/pages/HomePage'
+import { AdminRouter } from './admin/routes/AdminRotuer'
 
-function App() {
+export const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/admin/*" element={<AdminRoutes />} />
-        <Route path="/" element={<UserPage/>}/>
-      </Routes>
-    </BrowserRouter>
-  );
+    <Routes>
+      <Route path="/*" element={<HomePage />} />
+      <Route path="/admin/*" element={<AdminRouter />} />
+    </Routes>
+  )
 }
-
-export default App;
