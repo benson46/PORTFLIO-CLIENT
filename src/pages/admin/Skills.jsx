@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Sidebar } from "../../components/admin/Sidebar";
 import { SkillSection } from "../../components/admin/skills/SkillSection";
 import { SkillCard } from "../../components/admin/skills/SkillCard";
-import { skillsService } from "../../services/skill";
+import { skillsService } from "../../services/api/skill";
 
 export default function Skills() {
   const [skills, setSkills] = useState({

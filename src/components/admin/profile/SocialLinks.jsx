@@ -54,9 +54,9 @@ export const SocialLinks = ({ socialLinks, handleLinkChange }) => {
         </div>
       ) : (
         <div className="space-y-3">
-          {socialLinks.linkedin && (
+          {SocialLinks.linkedin && (
             <a 
-              href={socialLinks.linkedin} 
+              href={SocialLinks.linkedin} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -65,9 +65,9 @@ export const SocialLinks = ({ socialLinks, handleLinkChange }) => {
               <span className="truncate">LinkedIn</span>
             </a>
           )}
-          {socialLinks.leetcode && (
+          {SocialLinks.leetcode && (
             <a 
-              href={socialLinks.leetcode} 
+              href={SocialLinks.leetcode} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-yellow-400 hover:text-yellow-300"
@@ -78,9 +78,9 @@ export const SocialLinks = ({ socialLinks, handleLinkChange }) => {
               <span className="truncate">LeetCode</span>
             </a>
           )}
-          {socialLinks.github && (
+          {SocialLinks.github && (
             <a 
-              href={socialLinks.github} 
+              href={SocialLinks.github} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-300 hover:text-white"
@@ -89,7 +89,7 @@ export const SocialLinks = ({ socialLinks, handleLinkChange }) => {
               <span className="truncate">GitHub</span>
             </a>
           )}
-          {!socialLinks.linkedin && !socialLinks.leetcode && !socialLinks.github && (
+          {!SocialLinks.linkedin && !SocialLinks.leetcode && !SocialLinks.github && (
             <p className="text-gray-500 text-sm">No social links added</p>
           )}
         </div>

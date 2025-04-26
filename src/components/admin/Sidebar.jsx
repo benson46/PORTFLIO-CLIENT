@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { authService } from "../../services/auth";
+import { authService } from "../../services/api/auth";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export function Sidebar() {
